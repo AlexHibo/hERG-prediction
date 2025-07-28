@@ -113,9 +113,11 @@ En s'inspirant du papier de recherche CardioTox net, nous avons donc décidé de
 Le XGBoost avec Optuna modèle nous a permis d'obtenir les résultats suivant:
 
 
-4) Pour les données type **SMILES**, nous avons opté pour 2 startégies asez différentes. La première était de fine-tuner le modèle **seyonec/ChemBERTa-zinc-base-v1**, qui est une adaptation de RoBERTa (qui est lui même un modèle de type **Transformer** initialement conçu pour le langage naturel) qui a été entrainé non pas sur du texte classique, mais sur des représentations chimiques de molécules au format SMILES. L'objectif était donc claire finetuner un modèle capable de comprendre les données au format SMILES dans l'objectif d'une classification binaire. Pour la tokenization, nous nous sommes basés sur la même source. EN effet, nous avons utilisé **RobertaForSequenceClassification** qui est une classe de Hugging Face Transformers qui ajoute une tête de classification (typiquement une couche linéaire) au-dessus du modèle RoBERTa.
+3) Pour les données type **SMILES**, nous avons opté pour 2 startégies asez différentes. 
 
-La deuxième approche était de faire un **GCNN (Graph Convultional NN)** qui permet donc de traiter d'une assez belle manière la chimie moléculaire car dans ce cadre les atomes sont des noeuds et leurs laisons sont les arêtes du graph. Un GNN était donc une solution idéale pour ce type de data et ce type de prblématique de classification binaire.
+3.1) La première était de fine-tuner le modèle **seyonec/ChemBERTa-zinc-base-v1**, qui est une adaptation de RoBERTa (qui est lui même un modèle de type **Transformer** initialement conçu pour le langage naturel) qui a été entrainé non pas sur du texte classique, mais sur des représentations chimiques de molécules au format SMILES. L'objectif était donc claire finetuner un modèle capable de comprendre les données au format SMILES dans l'objectif d'une classification binaire. Pour la tokenization, nous nous sommes basés sur la même source. EN effet, nous avons utilisé **RobertaForSequenceClassification** qui est une classe de Hugging Face Transformers qui ajoute une tête de classification (typiquement une couche linéaire) au-dessus du modèle RoBERTa.
+
+3.2) La deuxième approche était de faire un **GCNN (Graph Convultional NN)** qui permet donc de traiter d'une assez belle manière la chimie moléculaire car dans ce cadre les atomes sont des noeuds et leurs laisons sont les arêtes du graph. Un GNN était donc une solution idéale pour ce type de data et ce type de problématique de classification binaire.
 
 
 Pour la prédiction final, on utilise les probabilités obtenues grace au 4 méthodes ci-dessus pour créer un méta-modèle et obtenir une nouvelle probabilité qui nous permmetra déjà de classer pour la task3, puis ensuite pour la task 1. Nous avons essayé d'abord avec un **réseau de neurone dense** comme nous suggérait certains papier de recherche, cependant les résultats n'étant pas au rendez-vous sur notre set de validation (surement due à un manque de data). Ainsi nous avons plutôt obpté pour des méthodes plus traditionnels comme en prenant simplement **la moyenne, un vote de majorité, puis finallement avec une régression logistique**.
@@ -140,7 +142,7 @@ Une fois ce nouveau jeu d'entraînement construit, il nous a suffit d'essayer et
 Bonus
 ===========
 
-Dans les dossiers Annexe 1 et Annexe 2 figurent un lot d'essai qui n'ont pas été conservé pour le résultat final, mais qui nous a permis de mieux comprendre les datas et de mieux agir en conséquences.
+Dans les dossiers Annexe 1 et Annexe 2 figurent un lot d'essais qui n'ont pas été conservés pour le résultat final, mais qui nous a permis de mieux comprendre les datas et de mieux agir en conséquences.
 Pour la plupart cela constitue en réseaux de neurone n'ayant pas aboutis (sur GCNN ou simple DNN), de méthodes simples comme XGBoost, RandomForest ou encore LightGB.
 Il peut être intéressant de les regarder pour mieux comprendre comme notre projet a évolué, et pourquoi nous avons fait certains choix au lieu d'autres.
 
