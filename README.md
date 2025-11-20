@@ -6,7 +6,7 @@ About the project:
 
 The following datasets are provided for the hackathon at Ecole Telecom Paris with the student association,
 taking place from 05/23/2025 to 05/25/2025.
-This event is organized by MARGO and Qubit-pharmaceuticals.
+This event is organized by IBM, MARGO and Qubit-pharmaceuticals.
 
 The aim of this event is to build a binary classifier capable of predicting whether a molecule is toxic or not.
 The toxicity studied here is that associated with hERG inhibition, cause of heart problems for certain drugs.
